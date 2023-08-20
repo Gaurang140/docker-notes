@@ -1,5 +1,15 @@
 # Docker and Docker Compose Cheat Sheet
 
+
+## Why Choose Docker?
+
+Docker provides developers with the flexibility to create applications using any programming language and toolchain. Applications that are containerized with Docker are highly portable, capable of running seamlessly on various platforms, including macOS, Windows laptops, cloud servers operating on Ubuntu, and VMs within production data centers powered by Red Hat.
+
+Developers can jump-start their projects by leveraging over 13,000 pre-existing applications from Docker Hub. Docker simplifies the management of changes and dependencies, facilitating sysadmins' comprehension of how these applications function. Through Docker Hub, developers can automate their building process, sharing their creations with collaborators via public or private repositories.
+
+Ultimately, Docker empowers developers to construct and deliver applications of superior quality at an accelerated pace.
+
+
 ## Docker Commands
 
 ### Pulling Images
@@ -58,7 +68,56 @@ d088653c4e52   postgres   "docker-entrypoint.s…"   About a minute ago   Up Abo
 
 This information is valuable for monitoring and managing your running Docker containers.
 
+
+
+## Stopping Containers 
+
+To halt a running container, you can use the `docker stop` command followed by the container's name or ID. This will gracefully stop the container, allowing it to perform any necessary cleanup before shutting down.
+
+### Syntax:
+
+```sh
+docker stop <container_name_or_id>
 ```
+
+For instance, if you have a container named "my-postgres-container" that you want to stop, you would execute the following command:
+
+```sh
+docker stop my-postgres-container
+```
+
+Once stopped, the container will exit, and you can verify its status using other Docker commands like `docker ps -a` to list all containers, including the stopped ones.
+
+
+## Viewing Stopped Containers
+
+After stopping a container using the `docker stop` command, you can use the `docker ps -a` command to view a list of all containers, including those that have exited or stopped. This command provides valuable information about the status, creation time, and other details of each container.
+
+### Syntax:
+
+```sh
+docker ps -a
+```
+
+For example, running the `docker ps -a` command might yield an output similar to the following:
+
+```sh
+CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS                         PORTS     NAMES
+d088653c4e52   postgres   "docker-entrypoint.s…"   21 minutes ago   Exited (0) 17 minutes ago                my-postgres-container
+904f40453641   postgres   "docker-entrypoint.s…"   2 hours ago      Exited (0) 2 hours ago                   my-post-gres-three
+104563e710e2   postgres   "docker-entrypoint.s…"   2 hours ago      Exited (0) About an hour ago             my-postgre-two
+133eb2c38c48   postgres   "docker-entrypoint.s…"   2 hours ago      Exited (0) About an hour ago             my-postgre-one
+28d7098af8f4   postgres   "docker-entrypoint.s…"   2 hours ago      Exited (0) 2 hours ago                   sweet_sanderson
+665d39b1a5ec   postgres   "docker-entrypoint.s…"   2 hours ago      Exited (0) 2 hours ago                   blissful_swanson
+ca1d4c5f498e   postgres   "docker-entrypoint.s…"   2 hours ago      Exited (1) 2 hours ago                   busy_moore
+```
+
+In this output, you can see a list of containers along with their Container IDs, Images used, the command executed, creation time, exit status, and the custom names assigned to the containers (if any). This information can be helpful for tracking and managing your containers' lifecycles.
+
+The `docker ps -a` command is especially useful for viewing both running and stopped containers.
+
+
+
 
 ### Building Images
 
