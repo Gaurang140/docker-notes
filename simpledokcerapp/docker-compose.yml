@@ -1,0 +1,14 @@
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+  web:
+    build: ./
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      uri :   "mongodb+srv://gaurang:GAURANG@cluster0.ogtv1f4.mongodb.net/?retryWrites=true&w=majority"
+    image: myflaskapp:1.0
